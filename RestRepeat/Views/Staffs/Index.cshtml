@@ -7,66 +7,74 @@
     ViewBag.Title = "Staff";
 }
 
-<h2>Staff</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@using (Html.BeginForm("Index", "Staff", FormMethod.Get))
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
-    </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
-        </th>
-        <th>
-            First Name
-        </th>
-        <th>
-            Mail
-        </th>
-        <th>
-            Password
-        </th>
-        <th>
-            @Html.ActionLink("Hire Date", "Index", new { sortOrder = ViewBag.DateSortParm })
-        </th>
-        
-    </tr>
+<body>
+    <div class="container stat">
+        <h2 class="Administration">All workers/Staff</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HireDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+        <p>
+            @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary"})
+        </p>
+        @using (Html.BeginForm("Index", "Staff", FormMethod.Get))
+        {
+            <p>
+                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new {@class ="hidden"})
+            </p>
+        }
+        <table class="table tableFont">
+            <tr>
+                <th>
+                    @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Mail
+                </th>
+                <th>
+                    Password
+                </th>
+                <th>
+                    @Html.ActionLink("Hire Date", "Index", new { sortOrder = ViewBag.DateSortParm })
+                </th>
+                <th>
+                    Action
+                </th>
 
-</table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </tr>
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HireDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-success" }) 
+                        @Html.ActionLink("Read", "Details", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default" }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID}, htmlAttributes: new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+            
+        </table>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</body>

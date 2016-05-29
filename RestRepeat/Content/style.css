@@ -298,3 +298,8 @@ hr {
 .topPadd{
 	padding-top: 50px;
 }
+.tableFont{
+    font-family: segoeui;
+    font-size: 1.2em;
+    color: black;
+}
