@@ -9,6 +9,9 @@ namespace RestRepeat.Models
     public class Department
     {
         public int ID { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Department")]
         public string DepartmentName { get; set; }
 
         public virtual ICollection<Staff> workers { get; set; }

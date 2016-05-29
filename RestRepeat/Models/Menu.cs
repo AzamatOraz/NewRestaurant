@@ -9,6 +9,8 @@ namespace RestRepeat.Models
     public class Menu
     {
         public int ID { get; set; }
+
+        [StringLength(50)]
         public string FoodType { get; set; }
 
         public virtual Staff Manager { get; set; }

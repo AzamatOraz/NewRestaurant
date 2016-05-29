@@ -35,3 +35,4 @@ C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\Rest
 C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\obj\Debug\RestRepeat.Migrations.InitialCreate.resources
 C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\obj\Debug\RestRepeat.csproj.GenerateResource.Cache
 C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\obj\Debug\RestRepeat.Migrations.MaxLengthOnNames.resources
+C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\obj\Debug\RestRepeat.Migrations.ComplexDataModel.resources
