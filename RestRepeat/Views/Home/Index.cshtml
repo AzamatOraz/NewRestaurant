@@ -1,31 +1,131 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="@Url.Content("~/content/images/favicon.ico")" />
+    @Styles.Render("~/Content/style.css")
+    <script src='@Url.Content("~/Scripts/jquery-1.10.2.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/Scripts/bootstrap.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/Scripts/HomeScript.js")' type="text/javascript"></script>
+</head>
+
+
+
+<body>
+    <div class="container stat newClass">
+        <div class="row padd">
+            <h1 class="specialText" align="center">Welcome to our Italian Cafe</h1>
+
+            <div class="col-md-12">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div align="center" class="item">
+                            <img class="carouselImage" src="~/Content/images/cafe.jpg" alt="First slide">
+                        </div>
+                        <div align="center" class="item active">
+                            <img class="carouselImage" src="~/Content/images/cafe1.jpg" alt="Second slide">
+                        </div>
+                        <div align="center" class="item">
+                            <img class="carouselImage" src="~/Content/images/cafe2.jpg" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="wordPlace">
+                It's place to make dreams come true
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h3 class="specialText">Taste it!</h3>
+                <p class="contentText">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ad vel, similique corporis doloribus soluta. Quisquam deserunt quae fugit optio, sint voluptatem beatae necessitatibus accusamus quod, ullam illo, qui eaque.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde itaque tempora amet nesciunt doloribus ducimus magni praesentium quaerat est earum assumenda neque, eius explicabo atque tempore laudantium aspernatur, accusantium architecto!
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quis iusto nihil commodi culpa, neque facere debitis vel ratione mollitia voluptates incidunt, velit amet. Ad ducimus asperiores libero facere id.
+                </p>
+                <p class="contentText">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ad vel, similique corporis doloribus soluta. Quisquam deserunt quae fugit optio, sint voluptatem beatae necessitatibus accusamus quod, ullam illo, qui eaque.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde itaque tempora amet nesciunt doloribus ducimus magni praesentium quaerat est earum assumenda neque, eius explicabo atque tempore laudantium aspernatur, accusantium architecto!
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <div align="center" class="panel">
+                    <img class="panelSize" src="~/Content/images/salad.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="panel" align="center">
+                    <img src="~/Content/images/spaget.png" alt="" class="panelSize">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h3 class="specialText"> mmmm Spagetties</h3>
+                <p class="contentText">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim similique voluptatibus obcaecati ea, minima! Ex officiis earum, numquam quam sunt dolorum unde architecto, recusandae incidunt ducimus eum assumenda magnam. Deserunt.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium esse perferendis placeat illo? Magnam corrupti nemo saepe est ullam esse ex, recusandae aspernatur autem. Reiciendis saepe nulla expedita quam incidunt.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis officia labore deserunt temporibus vel, nesciunt quaerat veritatis cumque eos, natus quam cum illum quisquam odio error debitis necessitatibus beatae dolor?
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <h3 align="center" class="specialText"> Pizza <i class="icomoon icon-cool specialText"></i> </h3>
+        </div>
+        <div class="row padd">
+
+            <div class="col-md-2">
+                <div class="panel" align="center">
+                    <img class="panelSize2" src="~/Content/images/coke.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <p class="contentText">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est magnam odit officia nesciunt inventore, autem ullam beatae magni rem quia nobis qui, esse fugiat doloribus amet, blanditiis cumque optio voluptatem.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure ullam ratione cum, impedit illum et temporibus suscipit harum tempore ipsam quis enim quibusdam mollitia voluptates repudiandae recusandae modi corporis maiores!
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim similique voluptatibus obcaecati ea, minima! Ex officiis earum, numquam quam sunt dolorum unde architecto, recusandae incidunt ducimus eum assumenda magnam. Deserunt.
+                    Officiis officia labore deserunt temporibus vel, nesciunt quaerat veritatis cumque eos, natus quam cum illum quisquam odio error debitis necessitatibus beatae dolor?
+                </p>
+            </div>
+            <div class="col-md-2">
+                <div class="panel" align="center">
+                    <img src="~/Content/images/pizza.png" alt="" class="panelSize2">
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $().dropdown('toggle')
+    });
+</script>

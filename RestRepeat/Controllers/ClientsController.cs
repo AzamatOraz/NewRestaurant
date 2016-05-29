@@ -50,7 +50,7 @@ namespace RestRepeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Accumulation")] Client client)
+        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Accumulation, Manager")] Client client)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace RestRepeat.Controllers
             }
             var clientToUpdate = db.Clients.Find(id);
             if (TryUpdateModel(clientToUpdate, "",
-               new string[] { "ID,LastName,FirstName,Accumulation" }))
+               new string[] { "ID,LastName,FirstName,Accumulation, Manager" }))
             {
                 try
                 {

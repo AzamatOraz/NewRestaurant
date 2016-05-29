@@ -1,37 +1,122 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+}
+
+<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/style.css")
+    <script src='@Url.Content("~/Scripts/jquery-1.10.2.min.js")' type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#showLeft").click(function () {
+                $('.dropdown-toggle').dropdown()
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <div class="row topStyle">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-3">
+                    <img class="topicon" src="~/Content/images/icon.gif" alt="Alternate Text" />
+                    <h3 class="topHeading">La Villa Italia</h3>
+                </div>
+                <div class="col-md-3">
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+
+            <div class="row">
+                <div class="icon">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-list fonting"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Registration", "Create", "Staffs")</li>
+                            <li>@Html.ActionLink("Login", "Create", "Clients")</li>
+                        </ul>
+                    </div>
+                </div>
+                <menu>
+                    <ul>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
+
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Gallery" ? "active" : "")">
+                            @Html.ActionLink("Gallery", "Gallery", "Home")
+                        </li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Partners" ? "active" : "")">
+                            @Html.ActionLink("Partners", "Partners", "Home")
+                        </li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">
+                            @Html.ActionLink("About us", "About", "Home")
+                        </li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Menu" ? "active" : "")">
+                            @Html.ActionLink("Menu", "Menu", "Home")
+                        </li>
+                    </ul>
+                </menu>
             </div>
         </div>
+
     </div>
-    <div class="container body-content">
+    <div class="container-fluid">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="footer">
+            <div class="footer">
+                <div class="row rowSize">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <h4 class="footHeading">Our Contacts: </h4>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="footHeading">Address: </h4>
+                    </div>
+                    <div class="col-md-5">
+                        <h4 class="footHeading">Social networks: </h4>
+                    </div>
+                </div>
+                <div class="row rowSize">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+
+                        <ul class="Contacts">
+                            <li><span class="glyphicon glyphicon-phone-alt spanPad"></span>8(727)398-23-32</li>
+                            <li><span class="glyphicon glyphicon-phone spanPad"></span>8(701)736-35-55</li>
+                            <li><span class="glyphicon glyphicon-phone spanPad"></span>8(707)234-12-24</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3">
+                        <ul>
+                            <li><span class="glyphicon glyphicon-home spanPad"></span>Almaty city, Zharokov street 159</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3">
+                        <ul>
+                            <li><a class="styled" href="https://vk.com/club.lacucina"><img class="circled" src="~/Content/images/vk.png" alt="">   VK</a></li>
+                            <li><a class="styled" href="https://www.facebook.com/Citt%C3%A0-Italian-Restraunt-385251598209784/?fref=ts"><img class="circled" src="~/Content/images/facebook.png" alt="">   Facebook  </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <ul>
+                            <li><a class="styled" href="https://twitter.com/CarmelosItalian"><img class="circled" src="~/Content/images/twitter.png" alt="">   Twitter </a></li>
+                            <li><a class="styled" href="https://www.instagram.com/explore/locations/1023034678/"><img class="circled" src="~/Content/images/insta.jpg" alt="">   Instagram </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
