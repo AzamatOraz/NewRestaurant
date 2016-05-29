@@ -32,3 +32,5 @@ C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\Rest
 C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\bin\PagedList.Mvc.dll
 C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\bin\PagedList.xml
 C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\bin\PagedList.Mvc.xml
+C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\obj\Debug\RestRepeat.Migrations.InitialCreate.resources
+C:\Users\Ан\Documents\Visual Studio 2013\Projects\Practice ASP\RestRepeat\RestRepeat\obj\Debug\RestRepeat.csproj.GenerateResource.Cache
