@@ -34,6 +34,7 @@ namespace RestRepeat.Models
         public DateTime HireDate { get; set; }
 
         public virtual Department Department { get; set; }
+        
 
     }
 }

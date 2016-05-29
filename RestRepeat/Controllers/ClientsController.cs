@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RestRepeat.DAL;
 using RestRepeat.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace RestRepeat.Controllers
 {
@@ -40,6 +41,7 @@ namespace RestRepeat.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+            PopulateManagerDropDownList();
             return View();
         }
 
@@ -50,13 +52,21 @@ namespace RestRepeat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Accumulation")] Client client)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Clients.Add(client);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Clients.Add(client);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            PopulateManagerDropDownList(client.Manager);
             return View(client);
         }
 
@@ -72,23 +82,40 @@ namespace RestRepeat.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateManagerDropDownList();
+
             return View(client);
         }
 
         // POST: Clients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,Accumulation")] Client client)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(client);
+            var clientToUpdate = db.Clients.Find(id);
+            if (TryUpdateModel(clientToUpdate, "",
+               new string[] { "ID,LastName,FirstName,Accumulation" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            PopulateManagerDropDownList(clientToUpdate.Manager);
+            return View(clientToUpdate);
         }
 
         // GET: Clients/Delete/5
@@ -103,6 +130,7 @@ namespace RestRepeat.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(client);
         }
 
@@ -116,7 +144,13 @@ namespace RestRepeat.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        private void PopulateManagerDropDownList(object selectedManager = null)
+        {
+            var managersQuery = from d in db.Staffs
+                                   orderby d.LastName
+                                   select d;
+            ViewBag.ID = new SelectList(managersQuery, "ID", "LastName", selectedManager);
+        } 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -6,9 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
 using RestRepeat.DAL;
 using RestRepeat.Models;
+using PagedList;
+using System.Net.Mail;
 using System.Data.Entity.Infrastructure;
 
 namespace RestRepeat.Controllers
@@ -78,6 +79,7 @@ namespace RestRepeat.Controllers
         // GET: Staffs/Create
         public ActionResult Create()
         {
+            PopulateDepartmentsDropDownList();
             return View();
         }
 
@@ -101,7 +103,7 @@ namespace RestRepeat.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-            //PopulateDepartmentsDropDownList(staff.Department);
+            PopulateDepartmentsDropDownList(staff.Department);
             return View(staff);
         }
 
@@ -117,6 +119,7 @@ namespace RestRepeat.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateDepartmentsDropDownList();
             return View(staff);
         }
 
@@ -146,6 +149,8 @@ namespace RestRepeat.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+            PopulateDepartmentsDropDownList(staffToUpdate.Department);
+
             return View(staffToUpdate);
         }
 
@@ -185,7 +190,13 @@ namespace RestRepeat.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        {
+            var departmentsQuery = from d in db.Departments
+                                   orderby d.DepartmentName
+                                   select d;
+            ViewBag.ID = new SelectList(departmentsQuery, "ID", "DepartmentName", selectedDepartment);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

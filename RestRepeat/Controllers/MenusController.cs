@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RestRepeat.DAL;
 using RestRepeat.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace RestRepeat.Controllers
 {
@@ -40,6 +41,7 @@ namespace RestRepeat.Controllers
         // GET: Menus/Create
         public ActionResult Create()
         {
+            PopulateManagerDropDownList();
             return View();
         }
 
@@ -50,13 +52,21 @@ namespace RestRepeat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,FoodType")] Menu menu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Menus.Add(menu);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Menus.Add(menu);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            PopulateManagerDropDownList(menu.Manager);
             return View(menu);
         }
 
@@ -72,6 +82,8 @@ namespace RestRepeat.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateManagerDropDownList();
+
             return View(menu);
         }
 
@@ -80,15 +92,30 @@ namespace RestRepeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FoodType")] Menu menu)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(menu).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(menu);
+            var menuToUpdate = db.Menus.Find(id);
+            if (TryUpdateModel(menuToUpdate, "",
+               new string[] { "ID,FoodType" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            PopulateManagerDropDownList(menuToUpdate.Manager);
+            return View(menuToUpdate);
         }
 
         // GET: Menus/Delete/5
@@ -116,7 +143,13 @@ namespace RestRepeat.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        private void PopulateManagerDropDownList(object selectedManager = null)
+        {
+            var managersQuery = from d in db.Staffs
+                                orderby d.LastName
+                                select d;
+            ViewBag.ID = new SelectList(managersQuery, "ID", "LastName", selectedManager);
+        } 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

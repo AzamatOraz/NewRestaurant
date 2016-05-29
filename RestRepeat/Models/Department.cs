@@ -14,6 +14,6 @@ namespace RestRepeat.Models
         [Display(Name = "Department")]
         public string DepartmentName { get; set; }
 
-        public virtual ICollection<Staff> workers { get; set; }
+        //public virtual ICollection<Staff> workers { get; set; }
     }
 }
