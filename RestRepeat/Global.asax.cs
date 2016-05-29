@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RestRepeat.DAL;
+using System.Data.Entity.Infrastructure.Interception;
 
 namespace RestRepeat
 {
@@ -16,6 +18,8 @@ namespace RestRepeat
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DbInterception.Add(new RestaurantInterceptorTransientErrors());
+            DbInterception.Add(new RestaurantInterceptorLogging());
         }
     }
 }

@@ -127,9 +127,13 @@
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="DAL\RestaurantContext.cs" />
     <Compile Include="DAL\RestaurantInitializer.cs" />
+    <Compile Include="DAL\RestaurantInterceptorLogging.cs" />
+    <Compile Include="DAL\RestaurantInterceptorTransientErrors.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Menu.cs" />
