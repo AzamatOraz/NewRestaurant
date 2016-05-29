@@ -123,7 +123,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="DAL\RestaurantContext.cs" />
     <Compile Include="DAL\RestaurantInitializer.cs" />
@@ -195,6 +198,21 @@
     <Content Include="Views\Staffs\Details.cshtml" />
     <Content Include="Views\Staffs\Edit.cshtml" />
     <Content Include="Views\Staffs\Index.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Delete.cshtml" />
+    <Content Include="Views\Departments\Details.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Menus\Create.cshtml" />
+    <Content Include="Views\Menus\Delete.cshtml" />
+    <Content Include="Views\Menus\Details.cshtml" />
+    <Content Include="Views\Menus\Edit.cshtml" />
+    <Content Include="Views\Menus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
