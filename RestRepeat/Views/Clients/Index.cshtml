@@ -4,53 +4,62 @@
     ViewBag.Title = "Client";
 }
 
-<h2>Clients</h2>
+<body>
+    <div class="container stat">
+        <h2 class="Administration">Clients</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Accumulation)
-        </th>
-        <th>
-            Name
-        </th>
-    </tr>
+        <p>
+            @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary"})
+        </p>
+        <table class="table contentText">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Accumulation)
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accumulation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manager.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Accumulation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manager.LastName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-success"}) 
+                        @Html.ActionLink("Read", "Details", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default" }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+
+    </div>
+</body>

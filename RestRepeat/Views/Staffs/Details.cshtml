@@ -7,9 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Staff</h4>
+    <h4 class="Administration">Staff</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal contentText">
         <dt>
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Update", "Edit", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-primary"}) 
+    @Html.ActionLink("Back", "Index", null, htmlAttributes: new { @class = "btn btn-default"})
 </p>

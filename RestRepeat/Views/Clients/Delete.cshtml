@@ -4,45 +4,50 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<body>
+    <div class="container stat">
+        <h2 class="Administration">Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+        <h3 class="specialText">Are you sure you want to delete this?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal contentText">
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Accumulation)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Accumulation)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Accumulation)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Accumulation)
+                </dd>
 
-    </dl>
+            </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                <div class="form-actions no-color">
+                    @Html.ActionLink("Back", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                </div>
+            }
         </div>
-    }
-</div>
+
+    </div>
+</body>
