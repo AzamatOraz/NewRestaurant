@@ -1,32 +1,42 @@
-﻿@model IEnumerable<RestRepeat.Models.Staff>
+﻿@model PagedList.IPagedList<RestRepeat.Models.Staff>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Staff";
 }
 
-<h2>Index</h2>
+<h2>Staff</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "Staff", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mail)
+            Mail
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
+            Password
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HireDate)
+            @Html.ActionLink("Hire Date", "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>
-        <th></th>
+        
     </tr>
 
 @foreach (var item in Model) {
@@ -55,3 +65,8 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

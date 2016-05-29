@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using RestRepeat.DAL;
 using RestRepeat.Models;
 using System.Data.Entity.Infrastructure;
@@ -17,9 +18,46 @@ namespace RestRepeat.Controllers
         private RestaurantContext db = new RestaurantContext();
 
         // GET: Staffs
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Staffs.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var staffs = from s in db.Staffs
+                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                staffs = staffs.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    staffs = staffs.OrderBy(s => s.LastName);
+                    break;
+                case "date_desc":
+                    staffs = staffs.OrderByDescending(s => s.HireDate);
+                    break;
+                default:
+                    staffs = staffs.OrderBy(s => s.ID);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(staffs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Staffs/Details/5
